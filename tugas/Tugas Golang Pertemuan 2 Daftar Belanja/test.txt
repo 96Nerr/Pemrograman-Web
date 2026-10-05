@@ -1,0 +1,63 @@
+package main
+
+import (
+	"fmt"
+)
+
+// 1. Struct Item
+type Item struct {
+	Nama   string
+	Harga  float64
+	Jumlah int
+}
+
+// 2. Fungsi untuk menambah item (menggunakan pointer ke slice *[]Item)
+func TambahItem(daftar *[]Item, nama string, harga float64, jumlah int) error {
+	// Validasi
+	if harga <= 0 {
+		return fmt.Errorf("gagal menambah '%s': harga harus lebih dari 0", nama)
+	}
+	if jumlah <= 0 {
+		return fmt.Errorf("gagal menambah '%s': jumlah harus lebih dari 0", nama)
+	}
+
+	newItem := Item{
+		Nama:   nama,
+		Harga:  harga,
+		Jumlah: jumlah,
+	}
+	
+	// Dereference pointer (*) untuk meng-append data ke slice asli
+	*daftar = append(*daftar, newItem)
+	fmt.Printf("Berhasil menambah: %s (%d pcs)\n", nama, jumlah)
+	return nil
+}
+
+// 3. Fungsi untuk menghitung total (cukup passing slice biasa karena hanya membaca data)
+func HitungTotal(daftar []Item) float64 {
+	var total float64 = 0
+	for _, item := range daftar {
+		total += item.Harga * float64(item.Jumlah)
+	}
+	return total
+}
+
+// 4. Fungsi untuk menampilkan (cukup passing slice biasa)
+func Tampilkan(daftar []Item) {
+	fmt.Println("\n=== Daftar Belanja ===")
+	if len(daftar) == 0 {
+		fmt.Println("Daftar belanja masih kosong.")
+		return
+	}
+
+	for i, item := range daftar {
+		subtotal := item.Harga * float64(item.Jumlah)
+		fmt.Printf("%d. %s\n", i+1, item.Nama)
+		fmt.Printf("   %d x Rp%.0f = Rp%.0f\n", item.Jumlah, item.Harga, subtotal)
+	}
+	
+	fmt.Println("----------------------")
+	fmt.Printf("Total Keseluruhan: Rp%.0f\n", HitungTotal(daftar))
+	fmt.Println("======================\n")
+}
+

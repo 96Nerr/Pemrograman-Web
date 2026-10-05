@@ -1,0 +1,15 @@
+{{define "content"}}
+    <h3>{{.Judul}}</h3>
+    <ol>
+        {{range .Hewan}}
+            <li>{{.}}</li>
+        {{end}}
+    </ol>
+
+    <h3>Data Users</h3>
+    <ol>
+        {{range .Users}}
+            <li>{{.Name}}, Email : {{.Email}}, Umur: {{.Age}}</li>
+        {{end}}
+    </ol>
+{{end}}

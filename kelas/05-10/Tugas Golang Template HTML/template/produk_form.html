@@ -1,0 +1,18 @@
+{{define "content"}}
+    <h3>{{.Judul}}</h3>
+    {{if .Error}}
+        <p style="color: red;">{{.Error}}</p>
+    {{end}}
+    <form action="/produk/simpan" method="POST">
+        <p>
+            <label for="nama">Nama</label><br>
+            <input type="text" id="nama" name="nama" value="{{.Nama}}" required>
+        </p>
+        <p>
+            <label for="harga">Harga</label><br>
+            <input type="text" id="harga" name="harga" inputmode="numeric" pattern="[0-9]*" value="{{.Harga}}" required>
+        </p>
+        <button type="submit">Simpan</button>
+        <a href="/produk">Batal</a>
+    </form>
+{{end}}

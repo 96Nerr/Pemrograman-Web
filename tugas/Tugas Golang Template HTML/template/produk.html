@@ -1,0 +1,27 @@
+{{define "content"}}
+    <h3>{{.Judul}}</h3>
+    <a href="/produk/form"><button type="button">Tambah Baru</button></a>
+    <br><br>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Harga</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Produk}}
+                <tr>
+                    <td>{{.ID}}</td>
+                    <td>{{.Nama}}</td>
+                    <td>Rp {{.Harga}}</td>
+                </tr>
+            {{else}}
+                <tr>
+                    <td colspan="3">Belum ada produk</td>
+                </tr>
+            {{end}}
+        </tbody>
+    </table>
+{{end}}
